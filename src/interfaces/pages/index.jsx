@@ -15,9 +15,37 @@ import Tweet from '../components/data-display/Tweet/Tweet'
  }
 
 export default function Index() {
-    useIndex()
-    return <div>
-        <TextInput />
-        <Tweet tweet={tweet} />
-    </div>
+    const { user } = useIndex()
+    return(
+        <div>
+            <h1 className={styles['page-title']}>Tweet Clone</h1>
+            <div className={styles['tweet-container']}>
+                <img 
+                    src={user.picture} 
+                    alt={user.name} 
+                    className={styles['avatar']}
+                />
+                <TextInput />
+            </div>
+            <div className={styles['button-container']}>
+                <div> 0 /150</div>
+                <button className={styles['button-post']}>Tweetar</button>
+            </div>
+           
+           <ul className={styles['list']}>
+                <li className={styles['list-item']}>
+                     <Tweet tweet={tweet} />
+                </li>
+                <li className={styles['list-item']}>
+                     <Tweet tweet={tweet} />
+                </li>
+                <li className={styles['list-item']}>
+                     <Tweet tweet={tweet} />
+                </li>
+           </ul>
+
+           
+        </div>
+
+    ); 
 }
