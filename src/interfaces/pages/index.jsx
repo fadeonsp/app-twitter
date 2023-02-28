@@ -3,19 +3,17 @@ import styles from '../styles/pages/index.module.css'
 import TextInput from '../components/inputs/textInput/TextInput'
 import Tweet from '../components/data-display/Tweet/Tweet'
 
- const tweet = {
-    date: 'há 3 dias',
-    text: 'Meu primeiro tweet',
-    user: {
-        name: 'Eduardo césar',
-        username: 'fadeonsp',
-        picture: 'https://github.com/fadeonsp.png',
-
-    },
- }
-
 export default function Index() {
-    const { user } = useIndex()
+
+    const {
+        user,
+        text,
+        onTextChange,
+        maxTextLength,
+        sendTweet,
+        sortedTweetList, 
+    } = useIndex()
+
     return(
         <div>
             <h1 className={styles['page-title']}>Tweet Clone</h1>
@@ -25,26 +23,35 @@ export default function Index() {
                     alt={user.name} 
                     className={styles['avatar']}
                 />
-                <TextInput />
+                <TextInput 
+                    placeholder={'O que houve ?'}
+                    rows={3}
+                    maxLength={maxTextLength}
+                    value={text}
+                    onChange={onTextChange}
+                />
             </div>
             <div className={styles['button-container']}>
-                <div> 0 /150</div>
-                <button className={styles['button-post']}>Tweetar</button>
+
+                <div> {text.length} / {maxTextLength}</div>
+                <button 
+                    onClick={sendTweet}
+                    disabled={text.length === 0} 
+                    className={styles['button-post']}
+                >
+                    Tweetar
+                </button>
+
             </div>
            
            <ul className={styles['list']}>
-                <li className={styles['list-item']}>
-                     <Tweet tweet={tweet} />
-                </li>
-                <li className={styles['list-item']}>
-                     <Tweet tweet={tweet} />
-                </li>
-                <li className={styles['list-item']}>
-                     <Tweet tweet={tweet} />
-                </li>
-           </ul>
-
-           
+                {sortedTweetList.map((tweet) => (
+                    <li key={tweet.id} className={styles['list-item']}>
+                        <Tweet tweet={tweet.data} />
+                    </li>
+                ))}
+                
+            </ul>
         </div>
 
     ); 

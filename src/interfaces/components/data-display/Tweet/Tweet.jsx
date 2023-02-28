@@ -1,4 +1,4 @@
-/* eslint-disable jsx-a11y/alt-text */
+import { DateService } from '../../../../data/services/DateService'
 import styles from './Tweet.module.css'
 
 export default function Tweet({ tweet }) {
@@ -15,8 +15,10 @@ export default function Tweet({ tweet }) {
             <div className={styles['user']}>
                 <span className={styles['user-name']}>{user.name}</span>{' '}
                 <span className={styles['user-username']}>@{user.username}</span>
-                <span className={styles['date']}> - {tweet.date}</span>
+                <span className={styles['date']}> 
+                   {' '} - {DateService.relativeType(tweet.date)}</span>
             </div>
+
             <div className={styles['tweet-text']}>
                 {tweet.text}
             </div>
